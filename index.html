@@ -7,7 +7,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     </head>
     <body class="container">
-        <div>
+        <div class="mb-3">
             <!-- Cabecera y menu navegacion-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -37,7 +37,7 @@
                 </div>
             </nav>
         </div>
-        <div>
+        <div class="mb-3">
             <!-- Banner -->
             <img class="img-fluid" src="/imagenes/csgo.jpg"/>
         </div>
@@ -106,25 +106,27 @@
                     <div class="card-body">
                         <form>
                             <div>
-                                <label>Correo</label>
-                                <input type="text" />
+                                <label class="form-label">Correo</label>
+                                <input class="form-control" type="text" />
                             </div>
                             <div>
-                                <label>Password</label>
-                                <input type="text" />
+                                <label class="form-label">Password</label>
+                                <input class="form-control" type="text" />
                             </div>
                             <div>
-                                <label>Nombre</label>
-                                <input type="text" />
+                                <label class="form-label">Nombre</label>
+                                <input class="form-control" type="text" />
                             </div>
-                            <button type="button">Registrar</button>
+                            <div class="text-end">
+                                <button class="btn btn-warning mt-2" type="button">Registrar</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <!-- footer -->
-        <div class="card">
+        <div class="card mt-3">
             <div class="card-body">
                 Universidad de Lima - Programación Web 2021-2
             </div>
