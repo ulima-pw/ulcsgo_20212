@@ -9,7 +9,53 @@ app.set('view engine', 'ejs') // Configuramos el motor de templates
 // ENDPOINTS
 
 app.get('/', (req, res) => {
-    res.render('index')
+    const listaEventos = [
+        {
+            id : 1,
+            nombre : 'Torneo Marzo 2021'
+        },
+        {
+            id : 2,
+            nombre : 'Torneo Junio 2021'
+        },
+        {
+            id : 3,
+            nombre : 'Torneo Setiembre 2021'
+        }
+    ]
+
+    const listaTopPlayers = [
+        {
+            nombre : 'billy',
+            maps : 45,
+            rounds : 37,
+            k_d : 6,
+            k__d : 5,
+            rating : 4
+        },
+        {
+            nombre : 'joaquin',
+            maps : 56,
+            rounds : 37,
+            k_d : 6,
+            k__d : 5,
+            rating : 4
+        },
+        {
+            nombre : 'alessandra',
+            maps : 40,
+            rounds : 33,
+            k_d : 3,
+            k__d : 5,
+            rating : 5
+        }
+    ]
+
+
+    res.render('index', {
+        eventos : listaEventos,
+        topPlayers : listaTopPlayers
+    })
 })
 
 app.listen(PORT, ()=> {
