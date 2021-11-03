@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node index.js",
-    "start:dev" : "npx nodemon index.js"
+    "start": "node index.js",
+    "start:dev": "npx nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,8 @@
   "homepage": "https://github.com/ulima-pw/ulcsgo_20212#readme",
   "dependencies": {
     "ejs": "^3.1.6",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-session": "^1.17.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"

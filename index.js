@@ -1,7 +1,8 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const session = require('express-session')
 
 const PORT = 5000
-const bodyParser = require('body-parser')
 const app = express()
 
 app.use(bodyParser.json())
@@ -10,6 +11,11 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(express.static('assets')) // soporte de archivos estaticos
 app.set('view engine', 'ejs') // Configuramos el motor de templates
+app.use(session({
+    secret : "daleu",
+    resave : false,
+    saveUninitialized : false
+})) // Configuramos servidor para trabajar con sesiones
 
 // ENDPOINTS
 
@@ -64,11 +70,17 @@ app.get('/', (req, res) => {
 })
 
 app.get('/torneos', (req, res)=> {
+    console.log("username", req.session.username)
     res.render('torneos')
 })
 
 app.get('/login', (req, res)=> {
-    res.render('login')
+    if (req.session.username != undefined) {
+        res.redirect('/torneos')
+    }else {
+        res.render('login')
+    }
+    
 })
 
 app.post('/login', (req, res) => {
@@ -77,6 +89,7 @@ app.post('/login', (req, res) => {
 
     if (username == "pw" && password == "123") {
         // Login correcto
+        req.session.username = username // guardando variable en sesion
         res.redirect("/torneos")
     }else {
         res.redirect('/login')
