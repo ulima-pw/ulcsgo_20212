@@ -58,6 +58,14 @@ app.get('/', (req, res) => {
     })
 })
 
+app.get('/torneos', (req, res)=> {
+    res.render('torneos')
+})
+
+app.get('/login', (req, res)=> {
+    res.render('login')
+})
+
 app.listen(PORT, ()=> {
     console.log(`El servidor se inicio correctamente en el puerto ${PORT}`)
 })
