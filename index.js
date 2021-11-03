@@ -1,8 +1,13 @@
 const express = require('express')
 
 const PORT = 5000
+const bodyParser = require('body-parser')
 const app = express()
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended : true
+}))
 app.use(express.static('assets')) // soporte de archivos estaticos
 app.set('view engine', 'ejs') // Configuramos el motor de templates
 
@@ -64,6 +69,18 @@ app.get('/torneos', (req, res)=> {
 
 app.get('/login', (req, res)=> {
     res.render('login')
+})
+
+app.post('/login', (req, res) => {
+    const username = req.body.username
+    const password = req.body.password
+
+    if (username == "pw" && password == "123") {
+        // Login correcto
+        res.redirect("/torneos")
+    }else {
+        res.redirect('/login')
+    }
 })
 
 app.listen(PORT, ()=> {
