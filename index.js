@@ -70,12 +70,21 @@ app.get('/', (req, res) => {
 })
 
 app.get('/torneos', (req, res)=> {
-    console.log("username", req.session.username)
+    const timestampActual = new Date().getTime();
+    const dif = timestampActual - req.session.lastLogin
+
+    if (dif < 3 * 60 * 60 * 1000) res.render('torneos')
+    else {
+        req.session.destroy() // Destruyes la sesion
+        res.render('/login')
+    }
+
     res.render('torneos')
 })
 
 app.get('/login', (req, res)=> {
     if (req.session.username != undefined) {
+        req.session.lastLogin = new Date().getTime()
         res.redirect('/torneos')
     }else {
         res.render('login')
