@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const db = require('./dao/models')
 
 const PORT = 5000
 const app = express()
@@ -69,17 +70,20 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/torneos', (req, res)=> {
+app.get('/torneos', async (req, res)=> {
     const timestampActual = new Date().getTime();
     const dif = timestampActual - req.session.lastLogin
 
-    if (dif < 3 * 60 * 60 * 1000) res.render('torneos')
-    else {
+    if (dif >= 3 * 60 * 60 * 1000) {
         req.session.destroy() // Destruyes la sesion
         res.render('/login')
+    }else {
+        // Obtener torneos de la base de datos
+        const torneos = await db.Torneo.findAll();
+        //console.log(torneos);
+        res.render('torneos')
     }
 
-    res.render('torneos')
 })
 
 app.get('/login', (req, res)=> {
