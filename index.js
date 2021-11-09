@@ -81,7 +81,9 @@ app.get('/torneos', async (req, res)=> {
         // Obtener torneos de la base de datos
         const torneos = await db.Torneo.findAll();
         //console.log(torneos);
-        res.render('torneos')
+        res.render('torneos', {
+            torneos : torneos
+        })
     }
 
 })

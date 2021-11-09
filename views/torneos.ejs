@@ -10,6 +10,24 @@
         <%- include('menu') %>
 
         <div>Aca ira la lista de torneos para administrarlos</div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% torneos.forEach( (torneo) => { %>
+                    <tr>
+                        <td><%= torneo.id %></td>
+                        <td><%= torneo.nombre %></td>
+                        <td><%= torneo.fecha %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
 
         <%- include('footer') %>
     </body>
