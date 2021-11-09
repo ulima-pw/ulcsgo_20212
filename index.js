@@ -88,6 +88,10 @@ app.get('/torneos', async (req, res)=> {
 
 })
 
+app.get('/torneos/new', (req, res) => {
+    res.render('torneos_new')
+})
+
 app.get('/login', (req, res)=> {
     if (req.session.username != undefined) {
         req.session.lastLogin = new Date().getTime()
