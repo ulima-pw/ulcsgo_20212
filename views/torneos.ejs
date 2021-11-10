@@ -10,7 +10,7 @@
         <%- include('menu') %>
 
         <h2>Mantenimiento de Torneos</h2>
-        <a class="btn btn-success" href="#">Nuevo</a>
+        <a class="btn btn-success" href="/torneos/new">Nuevo</a>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -27,7 +27,7 @@
                         <td><%= torneo.nombre %></td>
                         <td><%= torneo.fecha.toLocaleDateString('es-PE') %></td>
                         <td>
-                            <a href="#" >Editar</a>
+                            <a href="/torneos/modificar/<%= torneo.id %>" >Editar</a>
                             <a href="#" >Eliminar</a>
                         </td>
                     </tr>

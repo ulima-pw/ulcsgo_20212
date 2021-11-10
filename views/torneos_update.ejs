@@ -13,11 +13,17 @@
         <form method="post" action="/torneos/new">
             <div>
                 <label class="form-label">Nombre:</label>
-                <input name="torneo_nombre" type="text" class="form-control" />
+                <input name="torneo_nombre" 
+                    type="text" 
+                    class="form-control"
+                    value="<%= torneo.nombre %>" />
             </div>
             <div class="mb-2">
                 <label class="form-label">Fecha:</label>
-                <input name="torneo_fecha" type="date" class="form-control"/>
+                <input name="torneo_fecha" 
+                    type="date" 
+                    class="form-control"
+                    value="<%= torneo.fecha %>"/>
             </div>
             <button type="submit" class="btn btn-success">Guardar</button>
         </form>

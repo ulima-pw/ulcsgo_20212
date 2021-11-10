@@ -88,8 +88,39 @@ app.get('/torneos', async (req, res)=> {
 
 })
 
+// Mostramos el formulario
 app.get('/torneos/new', (req, res) => {
     res.render('torneos_new')
+})
+
+// Guadar datos del formulario de nuevo torneo
+app.post('/torneos/new', async (req, res) => {
+    const torneoNombre = req.body.torneo_nombre
+    const torneoFecha = req.body.torneo_fecha
+
+    await db.Torneo.create({
+        nombre : torneoNombre,
+        fecha : torneoFecha,
+        estado : 1
+    })
+
+    res.redirect('/torneos')
+})
+
+// path parameter: /torneos/modificar/10
+// query parameter": /torneos/modificar?id=10
+app.get('/torneos/modificar/:codigo', async (req, res) => {
+    const idTorneo = req.params.codigo
+
+    const torneo = await db.Torneo.findOne({
+        where : {
+            id : idTorneo
+        }
+    })
+
+    res.render('torneos_update', {
+        torneo : torneo
+    })
 })
 
 app.get('/login', (req, res)=> {
