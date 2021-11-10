@@ -79,7 +79,11 @@ app.get('/torneos', async (req, res)=> {
         res.render('/login')
     }else {
         // Obtener torneos de la base de datos
-        const torneos = await db.Torneo.findAll();
+        const torneos = await db.Torneo.findAll({
+            order : [
+                ['id', 'DESC']
+            ]
+        });
         //console.log(torneos);
         res.render('torneos', {
             torneos : torneos
@@ -121,6 +125,39 @@ app.get('/torneos/modificar/:codigo', async (req, res) => {
     res.render('torneos_update', {
         torneo : torneo
     })
+})
+
+app.post('/torneos/modificar', async (req, res) => {
+    const idTorneo = req.body.torneo_id
+    const nombre =req.body.torneo_nombre
+    const fecha = req.body.torneo_fecha
+
+    //1. Obtener un torneo con id: idTorneo
+    const torneo = await db.Torneo.findOne({
+        where : {
+            id : idTorneo
+        }
+    })
+    //2. Cambiar su propiedas / campos
+    torneo.nombre = nombre
+    torneo.fecha = fecha
+
+    //3. Guardo/Actualizo en la base de datos
+    await torneo.save()
+
+    res.redirect('/torneos')
+
+})
+
+app.get('/torneos/eliminar/:codigo', async (req, res) => {
+    const idTorneo = req.params.codigo
+    await db.Torneo.destroy({
+        where : {
+            id : idTorneo
+        }
+    })
+
+    res.redirect('/torneos')
 })
 
 app.get('/login', (req, res)=> {

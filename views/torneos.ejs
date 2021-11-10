@@ -25,10 +25,10 @@
                     <tr>
                         <td><%= torneo.id %></td>
                         <td><%= torneo.nombre %></td>
-                        <td><%= torneo.fecha.toLocaleDateString('es-PE') %></td>
+                        <td><%= torneo.fecha.toISOString().substring(0,10) %></td>
                         <td>
                             <a href="/torneos/modificar/<%= torneo.id %>" >Editar</a>
-                            <a href="#" >Eliminar</a>
+                            <a href="/torneos/eliminar/<%= torneo.id %>" >Eliminar</a>
                         </td>
                     </tr>
                 <% }) %>
