@@ -15,6 +15,15 @@
                 <label class="form-label">Nombre:</label>
                 <input name="torneo_nombre" type="text" class="form-control" />
             </div>
+            <div>
+                <label class="form-label">Tipo Torneo:</label>
+                <select name="torneo_tipotorneo_id" class="form-select">
+                    <option value="-1">----- Seleccione una opción -----</option>
+                    <% tiposTorneo.forEach( (tipo)=> { %>
+                        <option value="<%= tipo.id%>"><%= tipo.nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
             <div class="mb-2">
                 <label class="form-label">Fecha:</label>
                 <input name="torneo_fecha" type="date" class="form-control"/>

@@ -84,27 +84,58 @@ app.get('/torneos', async (req, res)=> {
                 ['id', 'DESC']
             ]
         });
-        //console.log(torneos);
+
+        let nuevaListaTorneos = []
+        for (let torneo of torneos) {
+            const tipoTorneo = await torneo.getTipoTorneo()
+            nuevaListaTorneos.push({
+                id : torneo.id,
+                nombre : torneo.nombre,
+                fecha : torneo.fecha,
+                tipoTorneoNombre : tipoTorneo.nombre
+            })
+        }
+        console.log("lista", nuevaListaTorneos)
+        
+        // Agregamos el nombre del TipoTorneo a lista
+        /*const nuevaListaTorneos = await torneos.map( async (torneo)=>{
+            const tipoTorneo = await torneo.getTipoTorneo()
+            //torneo.tipoTorneoNombre = tipoTorneo.nombre
+            return {
+                id : torneo.id,
+                nombre : torneo.nombre,
+                fecha : torneo.fecha,
+                tipoTorneoNombre : tipoTorneo.nombre
+            }
+        } )*/
+
+
         res.render('torneos', {
-            torneos : torneos
+            torneos : nuevaListaTorneos
         })
     }
 
 })
 
 // Mostramos el formulario
-app.get('/torneos/new', (req, res) => {
-    res.render('torneos_new')
+app.get('/torneos/new', async (req, res) => {
+    const tiposTorneo = await db.TipoTorneo.findAll()
+
+    res.render('torneos_new', {
+        tiposTorneo : tiposTorneo
+    })
 })
 
 // Guadar datos del formulario de nuevo torneo
 app.post('/torneos/new', async (req, res) => {
     const torneoNombre = req.body.torneo_nombre
     const torneoFecha = req.body.torneo_fecha
+    const torneoTipoTorneoId = req.body.torneo_tipotorneo_id
 
     await db.Torneo.create({
         nombre : torneoNombre,
         fecha : torneoFecha,
+        tipoTorneoId : torneoTipoTorneoId,
         estado : 1
     })
 

@@ -16,6 +16,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
+                    <th>Tipo Torneo</th>
                     <th>Fecha</th>
                     <th>Acciones</th>
                 </tr>
@@ -25,6 +26,7 @@
                     <tr>
                         <td><%= torneo.id %></td>
                         <td><%= torneo.nombre %></td>
+                        <td><%= torneo.tipoTorneoNombre %></td>
                         <td><%= torneo.fecha.toISOString().substring(0,10) %></td>
                         <td>
                             <a href="/torneos/modificar/<%= torneo.id %>" >Editar</a>
