@@ -153,8 +153,11 @@ app.get('/torneos/modificar/:codigo', async (req, res) => {
         }
     })
 
+    const tiposTorneo = await db.TipoTorneo.findAll()
+
     res.render('torneos_update', {
-        torneo : torneo
+        torneo : torneo,
+        tiposTorneo : tiposTorneo
     })
 })
 
@@ -162,6 +165,7 @@ app.post('/torneos/modificar', async (req, res) => {
     const idTorneo = req.body.torneo_id
     const nombre =req.body.torneo_nombre
     const fecha = req.body.torneo_fecha
+    const tipoTorneoId = req.body.torneo_tipotorneo_id
 
     //1. Obtener un torneo con id: idTorneo
     const torneo = await db.Torneo.findOne({
@@ -172,6 +176,7 @@ app.post('/torneos/modificar', async (req, res) => {
     //2. Cambiar su propiedas / campos
     torneo.nombre = nombre
     torneo.fecha = fecha
+    torneo.tipoTorneoId = tipoTorneoId
 
     //3. Guardo/Actualizo en la base de datos
     await torneo.save()
