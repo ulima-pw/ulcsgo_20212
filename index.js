@@ -155,9 +155,29 @@ app.get('/torneos/modificar/:codigo', async (req, res) => {
 
     const tiposTorneo = await db.TipoTorneo.findAll()
 
+    const equiposRegistrados = await db.Equipo.findAll()
+
+    const torneoEquipos = await db.TorneoEquipo.findAll({
+        where : {
+            torneoId : idTorneo
+        }
+    })
+
+    const arrEquiposEnTorneo = []
+    if (torneoEquipos.length > 0) {
+        for (let te of torneoEquipos) {
+            const equipo = await te.getEquipo()
+            arrEquiposEnTorneo.push(equipo)
+        }
+    }
+    
+
+
     res.render('torneos_update', {
         torneo : torneo,
-        tiposTorneo : tiposTorneo
+        tiposTorneo : tiposTorneo,
+        equipos : equiposRegistrados,
+        equiposEnTorneo : arrEquiposEnTorneo
     })
 })
 

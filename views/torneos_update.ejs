@@ -52,8 +52,10 @@
                 <div>
                     <form>
                         <select class="form-select">
-                            <option>Equipo 1</option>
-                            <option>Equipo 2</option>
+                            <option value="-1">---- Seleccione equipo ----</option>
+                            <% equipos.forEach( (equipo)=> { %>
+                                <option value="<%= equipo.id %>"><%= equipo.nombre %></option>
+                            <% }) %>
                         </select>
                         <button class="btn btn-success" type="submit">+</button>
                     </form>
@@ -66,10 +68,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Equipo6</td>
-                                <td><a class="btn btn-success" href="#">X</a></td>
-                            </tr>
+                            <% equiposEnTorneo.forEach((equipo)=> { %>
+                                <tr>
+                                    <td><%= equipo.nombre %></td>
+                                    <td><a class="btn btn-success" 
+                                            href="/torneo/equipo/delete/<%= torneo.id %>/<%= equipo.id %>">
+                                            X
+                                        </a>
+                                    </td>
+                                </tr>
+                            <% }) %>
                         </tbody>
                     </table>
                 </div>
