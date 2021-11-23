@@ -237,6 +237,20 @@ app.post('/torneo/equipo/inscribir', async (req, res) => {
     res.redirect(`/torneos/modificar/${torneoId}`)
 })
 
+app.get('/torneo/equipo/delete/:idtorneo/:idequipo', async (req, res) => {
+    const torneoId = req.params.idtorneo
+    const equipoId = req.params.idequipo
+
+    await db.TorneoEquipo.destroy({
+        where : {
+            torneoId : torneoId,
+            equipoId : equipoId
+        }
+    })
+
+    res.redirect(`/torneos/modificar/${torneoId}`)
+})
+
 app.get('/login', (req, res)=> {
     if (req.session.username != undefined) {
         req.session.lastLogin = new Date().getTime()
