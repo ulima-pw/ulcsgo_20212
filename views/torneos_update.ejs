@@ -50,8 +50,9 @@
                 <!-- Lista de equipos -->
                 <h3>Equipos registrados</h3>
                 <div>
-                    <form>
-                        <select class="form-select">
+                    <form method="post" action="/torneo/equipo/inscribir">
+                        <input type="hidden" name="inscripcion_torneo_id" value="<%= torneo.id %>" />
+                        <select class="form-select" name="inscripcion_equipo_id">
                             <option value="-1">---- Seleccione equipo ----</option>
                             <% equipos.forEach( (equipo)=> { %>
                                 <option value="<%= equipo.id %>"><%= equipo.nombre %></option>

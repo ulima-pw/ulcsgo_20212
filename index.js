@@ -170,8 +170,6 @@ app.get('/torneos/modificar/:codigo', async (req, res) => {
             arrEquiposEnTorneo.push(equipo)
         }
     }
-    
-
 
     res.render('torneos_update', {
         torneo : torneo,
@@ -214,6 +212,29 @@ app.get('/torneos/eliminar/:codigo', async (req, res) => {
     })
 
     res.redirect('/torneos')
+})
+
+app.post('/torneo/equipo/inscribir', async (req, res) => {
+    const torneoId = req.body.inscripcion_torneo_id
+    const equipoId = req.body.inscripcion_equipo_id
+
+    // Verificacion si ya esta inscrito el equipo
+    const equipos = await db.TorneoEquipo.findAll({
+        where : {
+            torneoId : torneoId,
+            equipoId : equipoId
+        }
+    })
+
+    if (equipos.length == 0) {
+        await db.TorneoEquipo.create({
+            torneoId : torneoId,
+            equipoId : equipoId,
+            status : 1 // ACTIVO
+        })
+    }
+
+    res.redirect(`/torneos/modificar/${torneoId}`)
 })
 
 app.get('/login', (req, res)=> {
